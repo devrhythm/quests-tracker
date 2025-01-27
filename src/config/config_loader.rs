@@ -1,6 +1,6 @@
 use anyhow::{Ok, Result};
 
-use super::config_model::{Database, DotEnvyConfig, Server};
+use super::{config_model::{AdventurersSecret, Database, DotEnvyConfig, GuildCommandersSecret, Server}, stage::Stage};
 
 pub fn load() -> Result<DotEnvyConfig> {
     dotenvy::dotenv().ok();
@@ -22,4 +22,30 @@ pub fn load() -> Result<DotEnvyConfig> {
     };
 
     Ok(DotEnvyConfig { server, database })
+}
+
+pub fn get_stage() -> Stage {
+  dotenvy::dotenv().ok();
+
+  let stage_str = std::env::var("STAGE").unwrap_or_default();
+
+  Stage::try_from(&stage_str).unwrap_or_default()
+}
+
+pub fn get_adventurers_secret_env() -> Result<AdventurersSecret> {
+  dotenvy::dotenv().ok();
+
+  Ok(AdventurersSecret{
+    secret: std::env::var("JWT_ADVENTURER_SECRET").expect("JWT_ADVENTURER_SECRET is invalid"),
+    refresh_secret: std::env::var("JWT_ADVENTURER_SECRET").expect("JWT_ADVENTURER_SECRET is invalid")
+  })
+}
+
+pub fn get_guild_commanders_secret_env() -> Result<GuildCommandersSecret> {
+  dotenvy::dotenv().ok();
+
+  Ok(GuildCommandersSecret {
+    secret: std::env::var("JWT_GUILD_COMMANDER_SECRET").expect("JWT_GUILD_COMMANDER_SECRET is invalid"),
+    refresh_secret: std::env::var("JWT_GUILD_COMMANDER_SECRET").expect("JWT_GUILD_COMMANDER_SECRET is invalid"),
+  })
 }
