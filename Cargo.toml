@@ -8,7 +8,7 @@ anyhow = "1.0.95"
 argon2 = "0.5.3"
 async-trait = "0.1.85"
 axum = "0.8.1"
-axum-extra = { version = "0.10.0", feature = ["cookie", "typed-header"] }
+axum-extra = { version = "0.10.0", features = ["cookie", "typed-header"] }
 chrono = { version = "0.4.39", features = ["serde"] }
 cookie = "0.18.1"
 diesel = { version = "2.2.6", features = ["postgres", "serde_json", "chrono", "r2d2"] }
