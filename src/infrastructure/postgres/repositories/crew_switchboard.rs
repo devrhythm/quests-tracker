@@ -6,7 +6,7 @@ use crate::{
     domain::{
         entities::adventurers::AdventurerEntity,
         repositories::{
-            adventurers::AdventurersRepository, crew_switch_board::CrewSwitchBoardRepository,
+            adventurers::AdventurersRepository, crew_switch_board::CrewSwitchboardRepository,
         },
         value_objects::{
             adventurer_model::RegisterAdventurerModel,
@@ -16,18 +16,18 @@ use crate::{
     infrastructure::postgres::postgres_connection::PgPoolSquad,
 };
 
-pub struct CrewSwitchBoardPostgres {
+pub struct CrewSwitchboardPostgres {
     db_pool: Arc<PgPoolSquad>,
 }
 
-impl CrewSwitchBoardPostgres {
+impl CrewSwitchboardPostgres {
     pub fn new(db_pool: Arc<PgPoolSquad>) -> Self {
         Self { db_pool }
     }
 }
 
 #[async_trait]
-impl CrewSwitchBoardRepository for CrewSwitchBoardPostgres {
+impl CrewSwitchboardRepository for CrewSwitchboardPostgres {
     async fn join(&self, junction_body: QuestAdventurerJunction) -> Result<()> {
         unimplemented!()
     }
